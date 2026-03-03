@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Оформление заказа - Keeper of Time</title><link rel="stylesheet" href="assets/css/style.css"></head>
+<body>
+<div class="container">
+<header class="header"><div class="brand"><div class="logo">KT</div><div><strong>Keeper of Time</strong><small class="small">Классические и современные часы. Доставка по Казахстану.</small></div></div><nav class="nav"><a href="index.html" >Главная</a>
+    <a href="catalog.html" class="active">Каталог</a>
+  <div class="dropdown-content">
+    <div class="dropdown-submenu">
+      <a href="#">Бренды</a>
+      <div class="submenu-content">
+        <a href="platinor.html">Platinor</a>
+        <a href="franck-muller.html">Franck Muller</a>
+        <a href="seaborne.html">Seaborne</a>
+        <a href="concord.html">Concord</a>
+        <a href="cronos.html">Cronos</a>
+        <a href="longines.html">Longines</a>
+        <a href="solace.html">Solace</a>
+        <a href="ernest-borel.html">Ernest Borel</a>
+      </div>
+    </div>
+    <div class="dropdown-submenu">
+      <a href="#">Материалы</a>
+      <div class="submenu-content">
+        <a href="steel.html">Сталь</a>
+        <a href="titan.html">Титан</a>
+        <a href="gold.html">Золото</a>
+        <a href="silver.html">Серебро</a>
+        <a href="carbon.html">Карбон</a>
+      </div>
+    </div>
+    <div class="dropdown-submenu">
+      <a href="#">Механизмы</a>
+      <div class="submenu-content">
+        <a href="quartz.html">Кварц</a>
+        <a href="automatic.html">Автомат</a>
+        <a href="mechanical.html">Механические</a>
+      </div>
+    </div>
+  </div>
+    <a href="about.html" >О нас</a><a href="contacts.html" >Контакты</a><a href="favorites.html" >Избранное</a><a href="compare.html" >Сравнение</a></nav><div class="langswitch"></div></header>
+<main>
+<section class="card">
+<h1>Оформление заказа</h1>
+<p class="muted">Заполните форму для оформления заказа. Мы свяжемся для подтверждения.</p>
+<form onsubmit="submitOrder(event)">
+<div class="form-row"><label class="small">Выберите способ получения</label><select name="deliveryType" class="input"><option value="delivery">Доставка</option><option value="pickup">Самовывоз</option></select></div>
+<div class="form-row"><label class="small">Способ оплаты</label><select name="payment" class="input"><option value="card">Банковская карта</option><option value="cod">Наличные при получении</option></select></div>
+<div class="form-row"><label class="small">Данные получателя</label><input name="fullname" class="input" required placeholder="ФИО получателя" /><input name="phone" class="input" required placeholder="+7 7XX XXX XXXX" /></div>
+<div class="row"><button class="btn" type="submit">Подтвердить заказ</button><a class="ghost" href="cart.html">Вернуться в корзину</a></div>
+</form>
+</section>
+</main>
+<footer><div>© Keeper of Time, 2025. Все права защищены.</div><div>Гарантия 2 года. Поддержка: support@keeperoftime.example</div></footer>
+</div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
