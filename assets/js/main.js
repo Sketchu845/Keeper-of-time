@@ -5,6 +5,21 @@ const APP = {
   products: []
 };
 
+function showToast(message, duration = 1500) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add('fade-out');
+    setTimeout(() => toast.remove(), 200);
+  }, duration);
+}
+
 function saveState() {
   localStorage.setItem('kot_cart', JSON.stringify(APP.cart));
   localStorage.setItem('kot_fav', JSON.stringify(APP.fav));
@@ -115,19 +130,19 @@ function renderGrid(containerId, items) {
     const d = document.createElement('div');
     d.className = 'product';
     d.innerHTML = `
-      <div class="thumb"><img src="${it.image}" alt="${it.title}" loading="lazy"></div>
-      <div class="title">${it.title}</div>
-      <div class="small">${it.brand} · ${it.type}</div>
-      <div class="row">
-        <div class="price badge">$${it.price}</div>
-        <div style="flex:1"></div>
-        <button class="btn" onclick="addToCart('${it.id}')">В корзину</button>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <button class="ghost" onclick="addToFav('${it.id}')">♥</button>
-        <button class="ghost" onclick="addToCompare('${it.id}')">⚖</button>
-        <a class="ghost" href="product.html?id=${it.id}">Подробнее</a>
-      </div>`;
+  <div class="thumb"><img src="${it.image}" alt="${it.title}" loading="lazy"></div>
+  <div class="title">${it.title}</div>
+  <div class="small">${it.brand} · ${it.type}</div>
+  <div class="row">
+    <div class="price badge">$${it.price}</div>
+    <div style="flex:1"></div>
+    <button class="btn" onclick="addToCart('${it.id}')">В корзину</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:8px">
+    <button class="ghost fav-btn ${APP.fav.includes(it.id) ? 'active' : ''}" data-id="${it.id}" onclick="addToFav('${it.id}')">♥</button>
+    <button class="ghost cmp-btn ${APP.compare.includes(it.id) ? 'active' : ''}" data-id="${it.id}" onclick="addToCompare('${it.id}')">⚖</button>
+    <a class="ghost" href="product.html?id=${it.id}">Подробнее</a>
+  </div>`;
     cont.appendChild(d);
   });
 }
@@ -141,16 +156,41 @@ function searchCatalog(q) {
 }
 
 function addToCart(id) {
-  if (!APP.cart.includes(id)) APP.cart.push(id);
+  if (!APP.cart.includes(id)) {
+    APP.cart.push(id);
+    showToast('Товар добавлен в корзину');
+  } else {
+    showToast('Товар уже в корзине');
+  }
   saveState();
 }
+
 function addToFav(id) {
-  if (!APP.fav.includes(id)) APP.fav.push(id);
+  const wasInFav = APP.fav.includes(id);
+  if (!wasInFav) {
+    APP.fav.push(id);
+    showToast('Добавлено в избранное ♥');
+  } else {
+    APP.fav = APP.fav.filter(x => x !== id);
+    showToast('Удалено из избранного');
+  }
   saveState();
+  updateActiveButtons();
 }
+
 function addToCompare(id) {
-  if (!APP.compare.includes(id) && APP.compare.length < 4) APP.compare.push(id);
+  if (APP.compare.includes(id)) {
+    APP.compare = APP.compare.filter(x => x !== id);
+    showToast('Удалено из сравнения');
+  } else if (APP.compare.length < 4) {
+    APP.compare.push(id);
+    showToast('Добавлено в сравнение');
+  } else {
+    showToast('Можно сравнить не более 4 товаров');
+    return;
+  }
   saveState();
+  updateActiveButtons();
 }
 function removeFromCart(id) {
   APP.cart = APP.cart.filter(x => x !== id);
@@ -210,6 +250,25 @@ function toggleFav(id) {
   APP.fav = APP.fav.includes(id) ? APP.fav.filter(x => x !== id) : [...APP.fav, id];
   saveState();
   renderFavs();
+}
+
+function updateActiveButtons() {
+  document.querySelectorAll('.fav-btn').forEach(btn => {
+    const id = btn.dataset.id;
+    if (APP.fav.includes(id)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  document.querySelectorAll('.cmp-btn').forEach(btn => {
+    const id = btn.dataset.id;
+    if (APP.compare.includes(id)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
 }
 
 function renderCompare() {
@@ -290,6 +349,7 @@ function renderProductPage() {
   const p = APP.products.find(x => x.id === id) || APP.products[0];
   const holder = document.getElementById('productHolder');
   if (!holder) return;
+
   holder.innerHTML = `
     <div class="card">
       <div class="thumb"><img src="${p.image}" alt="${p.title}"></div>
@@ -302,10 +362,11 @@ function renderProductPage() {
         <button class="btn" onclick="addToCart('${p.id}')">В корзину</button>
       </div>
     </div>
-    <div style="margin-top:12px">
-      <button class="ghost" onclick="addToFav('${p.id}')">Добавить в избранное</button>
-      <button class="ghost" onclick="addToCompare('${p.id}')">Сравнить</button>
+    <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+      <button class="ghost fav-btn ${APP.fav.includes(p.id) ? 'active' : ''}" data-id="${p.id}" onclick="addToFav('${p.id}')">♥ Добавить в избранное</button>
+      <button class="ghost cmp-btn ${APP.compare.includes(p.id) ? 'active' : ''}" data-id="${p.id}" onclick="addToCompare('${p.id}')">⚖ Сравнить</button>
     </div>`;
+  updateActiveButtons();
 }
 
 function openCheckout() {
@@ -343,4 +404,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFavs();
   renderCompare();
   renderProductPage();
+  updateActiveButtons();
 });
