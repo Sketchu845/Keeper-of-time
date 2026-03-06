@@ -349,3 +349,138 @@ footer {
 .compare-table tr:last-child td {
   border-bottom: none;
 }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 30, 30, 0.95);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 40px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2000;
+  opacity: 0;
+  animation: toastFadeIn 0.2s ease forwards;
+  pointer-events: none;
+  border: 1px solid rgba(255,215,0,0.2);
+  white-space: nowrap;
+}
+@keyframes toastFadeIn {
+  0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.toast.fade-out {
+  animation: toastFadeOut 0.2s ease forwards;
+}
+@keyframes toastFadeOut {
+  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+}
+
+.fav-btn.active {
+  color: #ff4d4d !important;
+  border-color: #ff4d4d !important;
+}
+.cmp-btn.active {
+  color: #4d9eff !important;
+  border-color: #4d9eff !important;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 12px;
+    margin: 12px auto;
+  }
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .brand {
+    justify-content: center;
+  }
+  .brand .logo {
+    width: 52px;
+    height: 52px;
+    font-size: 20px;
+  }
+  .brand strong {
+    font-size: 16px;
+  }
+  .brand small {
+    font-size: 11px;
+  }
+  .nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  .nav a {
+    padding: 8px 12px;
+    font-size: 14px;
+    flex: 1 0 auto;
+    text-align: center;
+    background: rgba(255,255,255,0.02);
+    border-radius: 30px;
+  }
+  .dropdown-content {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+    min-width: auto;
+  }
+  .dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+  }
+  .dropdown-submenu .submenu-content {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    box-shadow: none;
+    background: transparent;
+    padding-left: 16px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .product {
+    padding: 10px;
+  }
+  .thumb {
+    height: 180px;
+  }
+  .row {
+    flex-wrap: wrap;
+  }
+  .btn, .ghost {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .slide-panel {
+    width: 100%;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+  }
+}
