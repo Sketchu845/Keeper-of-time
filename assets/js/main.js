@@ -396,8 +396,8 @@ function submitOrder(e) {
 }
 
 function initMobileMenu() {
-  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  if (!isTouch) return;
+  const isMobileTouch = window.matchMedia('(max-width: 640px) and (hover: none) and (pointer: coarse)').matches;
+  if (!isMobileTouch) return;
 
   const dropdowns = document.querySelectorAll('.dropdown, .dropdown-submenu');
 
