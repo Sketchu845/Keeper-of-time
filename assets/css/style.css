@@ -177,7 +177,7 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media (max-width: 640px) {
+@media (hover: none) and (pointer: coarse) {
   .container {
     padding: 12px;
     margin: 12px auto;
@@ -280,50 +280,5 @@ footer {
     height: 100vh;
     max-width: 100%;
     border-radius: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 8px;
-    margin: 8px auto;
-  }
-  .brand .logo {
-    width: 44px;
-    height: 44px;
-    font-size: 18px;
-  }
-  .brand strong {
-    font-size: 14px;
-  }
-  .brand small {
-    font-size: 10px;
-  }
-  .nav a {
-    padding: 6px 8px;
-    font-size: 12px;
-  }
-  .dropdown-content,
-  .dropdown-submenu .submenu-content {
-    padding-left: 8px !important;
-  }
-  .dropdown-submenu > a,
-  .submenu-content a {
-    padding: 6px 8px !important;
-    font-size: 12px;
-  }
-  .product {
-    padding: 8px;
-  }
-  .thumb {
-    height: 150px;
-  }
-  .btn, .ghost {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-  footer {
-    font-size: 11px;
-    padding: 10px;
   }
 }
