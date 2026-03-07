@@ -215,35 +215,29 @@ footer {
     border-radius: 30px;
   }
 
-  /* ===== Новые правила для мобильного меню ===== */
-  /* Отключаем hover-эффекты для подменю */
   .dropdown:hover .dropdown-content,
   .dropdown-submenu:hover .submenu-content {
     visibility: hidden;
     opacity: 0;
   }
 
-  /* Убираем абсолютное позиционирование, делаем статичным */
   .dropdown-content,
   .submenu-content {
     position: static;
     visibility: visible;
     opacity: 1;
-    display: none; /* по умолчанию скрыто */
+    display: none; 
     box-shadow: none;
     background: transparent;
     transition: none;
-    padding-left: 20px; /* отступ для вложенности */
+    padding-left: 20px; 
     min-width: auto;
   }
-
-  /* Показываем подменю при наличии класса open */
   .dropdown.open > .dropdown-content,
   .dropdown-submenu.open > .submenu-content {
     display: block;
   }
 
-  /* Стили для ссылок в подменю */
   .dropdown-content a,
   .submenu-content a {
     display: block;
@@ -253,7 +247,6 @@ footer {
     text-decoration: none;
   }
 
-  /* Остальные правила для сетки, героя и т.д. */
   .hero {
     grid-template-columns: 1fr;
     gap: 12px;
