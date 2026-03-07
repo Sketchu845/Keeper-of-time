@@ -396,8 +396,15 @@ function submitOrder(e) {
 }
 
 function initMobileMenu() {
-  const isMobileTouch = window.matchMedia('(max-width: 640px) and (hover: none) and (pointer: coarse)').matches;
-  if (!isMobileTouch) return;
+  const isNarrow = window.innerWidth <= 640;
+  const hasTouch = 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 0;
+  
+  if (isNarrow && hasTouch) {
+    document.body.classList.add('touch');
+  } else {
+    document.body.classList.remove('touch');
+    return;
+  }
 
   const dropdowns = document.querySelectorAll('.dropdown, .dropdown-submenu');
 
