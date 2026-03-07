@@ -395,43 +395,6 @@ function submitOrder(e) {
   closeCheckout();
 }
 
-function initMobileMenu() {
-  const isNarrow = window.innerWidth <= 640;
-  const hasTouch = 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 0;
-  
-  if (isNarrow && hasTouch) {
-    document.body.classList.add('touch');
-  } else {
-    document.body.classList.remove('touch');
-    return;
-  }
-
-  const dropdowns = document.querySelectorAll('.dropdown, .dropdown-submenu');
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.dropdown, .dropdown-submenu')) {
-      dropdowns.forEach(item => item.classList.remove('open'));
-    }
-  });
-
-  dropdowns.forEach(item => {
-    const link = item.querySelector('a:first-child');
-    if (!link) return;
-
-    link.addEventListener('click', (e) => {
-      const submenu = item.querySelector('.dropdown-content, .submenu-content');
-      if (!submenu) return;
-
-      if (item.classList.contains('open')) {
-        item.classList.remove('open');
-      } else {
-        e.preventDefault();
-        item.classList.add('open');
-      }
-    });
-  });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   genProducts();
   updateBadges();
@@ -442,5 +405,4 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCompare();
   renderProductPage();
   updateActiveButtons();
-  initMobileMenu();
 });
