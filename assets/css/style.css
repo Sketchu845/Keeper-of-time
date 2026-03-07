@@ -169,14 +169,6 @@ footer {
   color: var(--muted);
 }
 
-@media (max-width: 1000px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 @media (hover: none) and (pointer: coarse) {
   .container {
     padding: 12px;
