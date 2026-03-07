@@ -188,38 +188,35 @@ footer {
   .slide-panel { width: 100%; right: 0; top: 0; height: 100vh; max-width: 100%; border-radius: 0; }
 }
 
-@media (max-width: 640px) and (hover: none) and (pointer: coarse) {
-  /* Отключаем hover */
-  .dropdown:hover .dropdown-content,
-  .dropdown-submenu:hover .submenu-content {
-    visibility: hidden;
-    opacity: 0;
-  }
+body.touch .dropdown:hover .dropdown-content,
+body.touch .dropdown-submenu:hover .submenu-content {
+  visibility: hidden;
+  opacity: 0;
+}
 
-  .dropdown-content,
-  .submenu-content {
-    position: static;
-    visibility: visible;
-    opacity: 1;
-    display: none;
-    box-shadow: none;
-    background: transparent;
-    transition: none;
-    padding-left: 20px;
-    min-width: auto;
-  }
+body.touch .dropdown-content,
+body.touch .submenu-content {
+  position: static;
+  visibility: visible;
+  opacity: 1;
+  display: none;
+  box-shadow: none;
+  background: transparent;
+  transition: none;
+  padding-left: 20px;
+  min-width: auto;
+}
 
-  .dropdown.open > .dropdown-content,
-  .dropdown-submenu.open > .submenu-content {
-    display: block;
-  }
+body.touch .dropdown.open > .dropdown-content,
+body.touch .dropdown-submenu.open > .submenu-content {
+  display: block;
+}
 
-  .dropdown-content a,
-  .submenu-content a {
-    display: block;
-    padding: 8px 12px;
-    font-size: 14px;
-    color: var(--muted);
-    text-decoration: none;
-  }
+body.touch .dropdown-content a,
+body.touch .submenu-content a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
 }
